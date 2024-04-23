@@ -1,0 +1,22 @@
+#!url=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/youtube.module
+#!name=Youtube Premium DXH
+#!desc=Loại bỏ Quảng cáo trên YouTube (Beta)
+#Cập nhật: 14/03/2024
+# Loại bỏ quảng cáo xuất hiện trong Luồng, Video, Tìm kiếm và Shorts,
+# Loại bỏ quảng cáo video trong Shorts
+# Loại bỏ nút tải lên dưới cùng
+# Thêm tính năng hình ảnh trong hình (PIP), phát nhạc nền
+# Thông tin quảng cáo có thể bị bỏ sót, có thể xuất hiện quảng cáo ngẫu nhiên
+#TG: https://t.me/Dhungx
+#FB: https://www.facebook.com/profile.php?id=100078801188040&mibextid=LQQJ4d
+#IG: https://www.instagram.com/dhungx09
+
+[Script]
+# Module này đã đầy đủ, không cần sử dụng các quy tắc khác để tránh việc ghi đè.
+youtube = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting),requires-body=1,binary-body-mode=1,max-size=3145728,script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/youtube.js
+[URL Rewrite]
+# Sử dụng Mock để giảm chi phí
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad - reject-img
+
+[MITM]
+hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
