@@ -1,0 +1,17 @@
+#!url=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/spotify.module
+#!name=Spotify Premium Đỗ Hùng
+#!desc=Mở khóa một phần premium, khuyến nghị đăng nhập lại, không thể thiết lập chất lượng âm thanh cao cấp
+# 1. Trang tìm kiếm Danh sách bài hát / bài hát có thể chuyển đổi và phát toàn bộ
+# 2. Thư viện âm nhạc bài hát đã thích có thể chuyển đổi và phát toàn bộ
+# update ngày : 10/03/2024
+# i-cast x DXH
+# Cảnh báo: không được điều chỉnh bất cứ thứ gì trong đây vì tất cả đều được liên kết tới file ẩn!
+#TG: https://t.me/Dhungx
+#FB: https://www.facebook.com/profile.php?id=100078801188040&mibextid=LQQJ4d
+#IG: https://www.instagram.com/dhungx09
+
+[MITM]
+hostname = %APPEND% spclient.wg.spotify.com
+
+[Script]
+spotify-proto = type=http-response,pattern=^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/spotify.js,script-update-interval=0
