@@ -75,7 +75,6 @@ function processMapObj(accountAttributesMapObj){
     // accountAttributesMapObj['ab-nft-navigation-menu'] = {stringValue : '3'};
     // accountAttributesMapObj['ab-desktop-hide-follow'] = {boolValue : false};
 
-    // 不确定的字段
     // accountAttributesMapObj['social-session'] = {boolValue : true};
     // accountAttributesMapObj['head-files-url'] = {stringValue : 'https://heads-fa.scdn.co/head/{file_id}'};
     // accountAttributesMapObj['publish-playlist'] = {boolValue : true};
