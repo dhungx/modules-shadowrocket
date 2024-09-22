@@ -4,4 +4,4 @@
 ## Các Module
 
 - [YouTube Module](https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/youtube.module)
-- [Spotify Module](https://github.com/dhungx/modules-shadowrocket/blob/main/spotify.module)
+- [Spotify Module](https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/spotify.module)
