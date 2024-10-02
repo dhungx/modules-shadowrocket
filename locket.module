@@ -1,0 +1,13 @@
+#!url=https://raw.githubusercontent.com/dhungx/main/locket.module
+#!name=Locket-Gold
+#!desc=Locket unlock Gold
+# Update: 07/09/2024
+
+[Script]
+# By ViBoss Studio
+revenuecat = type=http-response, pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$), script-path=, requires-body=true, max-size=-1, timeout=60
+
+deleteHeader = type=http-request, pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts|subscribers), script-path=, timeout=60
+
+[MITM]
+hostname = %APPEND% api.revenuecat.com
