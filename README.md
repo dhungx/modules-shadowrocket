@@ -6,3 +6,4 @@
 - [YouTube Module](https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/youtube.module)
 - [Spotify Module](https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/spotify.module)
 - [Locket Module](https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/locket.module)
+- [SoundCloud Module](https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/soundcloud.module)
