@@ -1,5 +1,5 @@
-// ViBoss Studio - 02/09/2024
-const version = 'V1.0.3';
+// ViBoss Studio - 08/03/2025
+const version = 'V1.0.4';
 
 /**
  * Hàm đặt giá trị cho header (tự động xử lý chữ hoa/thường)
@@ -9,11 +9,7 @@ const version = 'V1.0.3';
  */
 function setHeaderValue(headers, headerName, value) {
     const lowerCaseHeader = headerName.toLowerCase();
-    if (lowerCaseHeader in headers) {
-        headers[lowerCaseHeader] = value;
-    } else {
-        headers[headerName] = value;
-    }
+    headers[lowerCaseHeader] = value;
 }
 
 // Lấy danh sách header từ request
@@ -21,14 +17,19 @@ let modifiedHeaders = { ...$request.headers };
 
 // Danh sách các header cần chỉnh sửa
 const headersToModify = {
-    "X-RevenueCat-ETag": "",      // Xóa giá trị ETag (tránh cache)
-    "X-Custom-Debug": "Enabled"   // (Tùy chọn) Thêm header debug
+    "X-RevenueCat-ETag": "",         // Xóa giá trị ETag (tránh cache)
+    "X-Client-Version": "99.99.99",  // Giả mạo phiên bản client
+    "X-Device-Model": "iPhone15,3",  // Giả lập thiết bị mới nhất
+    "X-Custom-Debug": "Enabled"      // (Tùy chọn) Thêm header debug
 };
 
 // Áp dụng các chỉnh sửa header
-for (const [key, value] of Object.entries(headersToModify)) {
+Object.entries(headersToModify).forEach(([key, value]) => {
     setHeaderValue(modifiedHeaders, key, value);
-}
+});
+
+// Ghi log để debug (có thể bỏ nếu không cần)
+console.log(`[ViBoss Studio] Đã chỉnh sửa headers:`, JSON.stringify(headersToModify, null, 2));
 
 // Hoàn tất request với header đã chỉnh sửa
 $done({ headers: modifiedHeaders });
