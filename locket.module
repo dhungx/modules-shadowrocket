@@ -1,18 +1,18 @@
 #!url=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/locket.module
 #!name=Locket-Gold  ViBoss Studio
 #!desc=Unlock Gold for Locket
-# Update: 07/09/2024
+# Update: 08/03/2025
 # Telegram: https://t.me/Dhungx
 
 [Script]
-# Intercept response từ RevenueCat API (bypass subscription check)
-revenuecat_response = type=http-response, pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$), script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/js/locket/Locket.js, requires-body=true, max-size=-1, timeout=60, force-policy=wifi-cellular
+# Bypass kiểm tra gói Premium từ RevenueCat API
+revenuecat_response = type=http-response, pattern=^https:\/\/api\.revenuecat\.com\/v\d+\/(receipts$|subscribers\/[^/]+$), script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/js/locket/Locket.js, requires-body=true, max-size=-1, force-policy=wifi-cellular
 
 # Xóa header quan trọng khỏi request để tránh bị phát hiện
-delete_revenuecat_headers = type=http-request, pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts|subscribers), script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/js/locket/deleteHeader.js, requires-body=false, timeout=60
+delete_revenuecat_headers = type=http-request, pattern=^https:\/\/api\.revenuecat\.com\/v\d+\/(receipts|subscribers), script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/js/locket/deleteHeader.js, requires-body=false, force-policy=wifi-cellular
 
-# Chặn các request không mong muốn (nếu cần)
-reject_unwanted = type=http-request, pattern=^https:\/\/api\.revenuecat\.com\/.+\/(offers|customers), reject-200
+# Chặn các request không mong muốn (giúp tăng tốc & tránh lỗi)
+reject_unwanted = type=http-request, pattern=^https:\/\/api\.revenuecat\.com\/v\d+\/(offers|customers|promotions), reject-200, force-policy=wifi-cellular
 
 [MITM]
 hostname = %APPEND% api.revenuecat.com
