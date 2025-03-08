@@ -18,11 +18,6 @@ try {
 // ========= Thêm Thông Báo ========= //
 obj.Attention = "Chúc mừng bạn! Vui lòng không bán hoặc chia sẻ cho người khác!";
 
-// ========= Hàm Lấy Ngày Hiện Tại ========= //
-function getCurrentISODate() {
-    return new Date().toISOString();
-}
-
 // ========= Dữ Liệu Gói Đăng Ký Giả ========= //
 const fakeSubscription = {
     is_sandbox: false,
@@ -32,14 +27,14 @@ const fakeSubscription = {
     expires_date: "2099-12-18T01:04:17Z",
     grace_period_expires_date: null,
     unsubscribe_detected_at: null,
-    original_purchase_date: getCurrentISODate(), // Ngày mua ban đầu là ngày hiện tại
-    purchase_date: getCurrentISODate(), // Ngày mua là ngày hiện tại
+    original_purchase_date: "2025-03-08T01:04:18Z",
+    purchase_date: "2025-03-08T01:04:17Z",
     store: "app_store"
 };
 
 const fakeEntitlement = {
     grace_period_expires_date: null,
-    purchase_date: getCurrentISODate(),
+    purchase_date: "2024-07-28T01:04:17Z",
     expires_date: "2099-12-18T01:04:17Z"
 };
 
