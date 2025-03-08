@@ -1,73 +1,57 @@
-var body = $response.body; 
-var obj = JSON.parse(body); 
+// ViBoss Studio - 08/03/2025
+const version = 'V1.0.1';
 
-obj.plan = {
-    "vendor" : "apple",
-    "id" : "high_tier",
-    "manageable" : true,
-    "plan_upsells" : [
+try {
+    let body = $response.body;
+    let obj = JSON.parse(body);
 
-    ],
-    "plan_id" : "go-plus",
-    "upsells" : [
+    // Cập nhật thông tin gói Premium (Go+)
+    obj.plan = {
+        "vendor": "apple",
+        "id": "high_tier",
+        "manageable": true,
+        "plan_id": "go-plus",
+        "plan_name": "SoundCloud Go+",
+        "expires_at": "2099-12-31T23:59:59Z",  // Thêm ngày hết hạn
+        "is_trial": false
+    };
 
-    ],
-    "plan_name" : "SoundCloud Go+"
-  },
+    // Danh sách tính năng cần bật (tự động mở khóa)
+    const premiumFeatures = [
+        "offline_sync",
+        "no_audio_ads",
+        "hq_audio",
+        "system_playlist_in_library",
+        "new_home",
+        "unlimited_skips",
+        "background_playback"
+    ];
 
-obj.features = [
-    {
-      "name" : "offline_sync",
-      "enabled" : true,
-      "plans" : [
-        "mid_tier",
-        "high_tier"
-      ]
-    },
-    {
-      "name" : "no_audio_ads",
-      "enabled" : true,
-      "plans" : [
-        "mid_tier",
-        "high_tier"
-      ]
-    },
-    {
-      "name" : "hq_audio",
-      "enabled" : true,
-      "plans" : [
-        "high_tier"
-      ]
-    },
-    {
-      "name" : "system_playlist_in_library",
-      "enabled" : true,
-      "plans" : [
+    // Cập nhật tính năng với trạng thái `enabled: true`
+    obj.features = premiumFeatures.map(feature => ({
+        "name": feature,
+        "enabled": true,
+        "plans": ["high_tier"]
+    }));
 
-      ]
-    },
-    {
-      "name" : "ads_krux",
-      "enabled" : false,
-      "plans" : [
+    // Vô hiệu hóa quảng cáo
+    obj.features.push({
+        "name": "ads_krux",
+        "enabled": false,
+        "plans": []
+    });
 
-      ]
-    },
-    {
-      "name" : "new_home",
-      "enabled" : true,
-      "plans" : [
+    // Chặn tính năng Spotlight nếu cần
+    obj.features.push({
+        "name": "spotlight",
+        "enabled": false,
+        "plans": []
+    });
 
-      ]
-    },
-    {
-      "name" : "spotlight",
-      "enabled" : false,
-      "plans" : [
+    // Chuyển đổi lại thành JSON và trả về kết quả
+    $done({ body: JSON.stringify(obj) });
 
-      ]
-    }
-  ],
-
-body = JSON.stringify(obj);
-$done({body});
+} catch (error) {
+    console.log(`[ViBoss Studio] Lỗi khi xử lý dữ liệu: ${error.message}`);
+    $done({});
+}
