@@ -34,7 +34,7 @@ const fakeSubscription = {
 
 const fakeEntitlement = {
     grace_period_expires_date: null,
-    purchase_date: "2024-07-28T01:04:17Z",
+    purchase_date: "2025-03-08T01:04:17Z",
     expires_date: "2099-12-18T01:04:17Z"
 };
 
