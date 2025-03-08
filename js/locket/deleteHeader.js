@@ -1,35 +1,33 @@
-// ViBoss Studio - 08/03/2025
-const version = 'V1.0.4';
+const version = 'V1.0.3';
 
-/**
- * Hàm đặt giá trị cho header (tự động xử lý chữ hoa/thường)
- * @param {object} headers - Đối tượng chứa header của request
- * @param {string} headerName - Tên header cần chỉnh sửa
- * @param {string} value - Giá trị mới cần gán cho header
- */
-function setHeaderValue(headers, headerName, value) {
-    const lowerCaseHeader = headerName.toLowerCase();
-    headers[lowerCaseHeader] = value;
+// Hàm đặt giá trị header
+function setHeaderValue(headers, key, value) {
+    const lowerKey = key.toLowerCase();
+    if (lowerKey in headers) {
+        headers[lowerKey] = value;
+    } else {
+        headers[key] = value;
+    }
 }
 
 // Lấy danh sách header từ request
-let modifiedHeaders = { ...$request.headers };
+var modifiedHeaders = $request.headers;
 
-// Danh sách các header cần chỉnh sửa
+// Danh sách các header cần xóa/cập nhật
 const headersToModify = {
-    "X-RevenueCat-ETag": "",         // Xóa giá trị ETag (tránh cache)
-    "X-Client-Version": "99.99.99",  // Giả mạo phiên bản client
-    "X-Device-Model": "iPhone15,3",  // Giả lập thiết bị mới nhất
-    "X-Custom-Debug": "Enabled"      // (Tùy chọn) Thêm header debug
+    "X-RevenueCat-ETag": "",
+    "If-None-Match": "",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache"
 };
 
-// Áp dụng các chỉnh sửa header
-Object.entries(headersToModify).forEach(([key, value]) => {
-    setHeaderValue(modifiedHeaders, key, value);
-});
+// Áp dụng thay đổi cho từng header trong danh sách
+for (let key in headersToModify) {
+    setHeaderValue(modifiedHeaders, key, headersToModify[key]);
+}
 
-// Ghi log để debug (có thể bỏ nếu không cần)
-console.log(`[ViBoss Studio] Đã chỉnh sửa headers:`, JSON.stringify(headersToModify, null, 2));
+// Ghi log để kiểm tra header đã bị sửa
+console.log("🛠 Modified Headers:", JSON.stringify(modifiedHeaders, null, 2));
 
-// Hoàn tất request với header đã chỉnh sửa
+// Trả về request với headers đã chỉnh sửa
 $done({ headers: modifiedHeaders });
