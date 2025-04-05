@@ -1,0 +1,12 @@
+#!url=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/soundcloud.module
+#!name=SoundCloudGo+ | ViBoss Studio
+
+#!desc=SoundCloudGo+
+
+[Script]
+
+SoundCloudGo+=type=http-response,pattern=https://api-mobile.soundcloud.com/configuration/ios,requires-body=1,script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/js/SoundCloud/soundcloud.js
+
+[MITM]
+
+hostname= %APPEND% api-mobile.soundcloud.com

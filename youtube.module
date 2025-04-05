@@ -1,0 +1,24 @@
+#!url=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/youtube.module
+#!name = YouTube BlockAd Beta
+#!desc = Hỗ trợ PIP, phát trong nền, chặn quảng cáo YouTube
+#!author = DoHungx
+# update: 23/09/2024
+# Telegram: https://t.me/Dhungx
+#!icon = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+
+[Rule]
+AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT
+AND,((DOMAIN,youtubei.googleapis.com), (PROTOCOL,UDP)),REJECT
+
+[URL Rewrite]
+(^https?://[\w-]+\.googlevideo\.com/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) $1$2$3 302
+^https?://[\w-]+\.googlevideo\.com/(?!(dclk_video_ads|videoplayback?)).+&oad _ reject-200
+^https?://(www|s)\.youtube\.com/api/stats/ads _ reject-200
+^https?://(www|s)\.youtube\.com/(pagead|ptracking) _ reject-200
+^https?://s\.youtube\.com/api/stats/qoe\?adcontext _ reject-200
+
+[Script]
+youtube.response = type=http-response,pattern=^https://youtubei\.googleapis\.com/youtubei/v1/(browse|next|player|search|reel/reel_watch_sequence|guide|account/get_setting|get_watch),requires-body=1,max-size=-1,binary-body-mode=1,engine=script,script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/js/Yt/youtube.response.preview.js,argument="{\"lyricLang\":\"{{{ngôn ngữ dịch lời bài hát}}}\",\"captionLang\":\"{{{ngôn ngữ dịch phụ đề}}}\",\"blockUpload\":{{{chặn nút tải lên}}},\"blockImmersive\":{{{chặn nút chọn đoạn}}},\"debug\":{{{kích hoạt chế độ gỡ lỗi}}}}"
+
+[MITM]
+hostname = %APPEND% redirector*.googlevideo.com,*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com

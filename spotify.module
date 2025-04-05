@@ -1,0 +1,15 @@
+#!url=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/spotify.module
+#!name=Spotify Premium ViBoss Studio
+#!desc=Mở khóa một phần premium, khuyến nghị đăng nhập lại, không thể thiết lập chất lượng âm thanh cao cấp
+# 1. Trang tìm kiếm Danh sách bài hát / bài hát có thể chuyển đổi và phát toàn bộ
+# 2. Thư viện âm nhạc bài hát đã thích có thể chuyển đổi và phát toàn bộ
+
+#Update: 01/04/2024
+#Back lại bản cũ + fix lại âm thanh
+#TG: https://t.me/Dhungx
+
+[MITM]
+hostname = %APPEND% spclient.wg.spotify.com
+
+[Script]
+spotify-proto = type=http-response,pattern=^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/main/js/spotify/spotify.js,script-update-interval=0

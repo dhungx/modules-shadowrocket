@@ -1,0 +1,20 @@
+#!name=Super Duolingo  
+#!desc=Unlock Super Duolingo  
+# By Dhungx | Telegram: https://t.me/dhungx 
+# Có thể không hoạt động vì Duolingo có thể đã fix, chặn MITM bằng TLS Pinning, sai API endpoint hoặc do cache.
+
+[General]
+force-http-engine-hosts = *duolingo.com
+
+[Rule]
+DOMAIN-SUFFIX,duolingo.com,Proxy
+DOMAIN-SUFFIX,duolingo.cn,Proxy
+DOMAIN-SUFFIX,duolingo.eu,Proxy
+DOMAIN-SUFFIX,duolingo.io,Proxy
+DOMAIN-SUFFIX,duolingo.tech,Proxy
+
+[Rewrite]
+^https:\/\/(ios-api-2|goals-api|ios-api-cf)\.duolingo\.com\/.*users.* script-path=https://raw.githubusercontent.com/dhungx/modules-shadowrocket/refs/heads/main/js/duolingo/super.js, requires-body=true, timeout=10, tag=Unlock_Super_Duolingo
+
+[MITM]
+hostname = %APPEND% ios-api-2.duolingo.com, goals-api.duolingo.com, ios-api-cf.duolingo.com
