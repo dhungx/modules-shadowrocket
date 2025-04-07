@@ -21,7 +21,7 @@ var ohoang7 = {
   store: "app_store"
 };
 
-var vuong2023 = {
+var dohungx = {
   grace_period_expires_date: null,
   purchase_date: "2024-07-28T01:04:17Z",
   product_identifier: "com.ohoang7.premium.yearly",
@@ -34,16 +34,16 @@ if (match) {
   let [e, s] = mapping[match];
   
   if (s) {
-    vuong2023.product_identifier = s;
+    dohungx.product_identifier = s;
     obj.subscriber.subscriptions[s] = ohoang7;
   } else {
     obj.subscriber.subscriptions["com.ohoang7.premium.yearly"] = ohoang7;
   }
 
-  obj.subscriber.entitlements[e] = vuong2023;
+  obj.subscriber.entitlements[e] = dohungx;
 } else {
   obj.subscriber.subscriptions["com.ohoang7.premium.yearly"] = ohoang7;
-  obj.subscriber.entitlements.pro = vuong2023;
+  obj.subscriber.entitlements.pro = dohungx;
 }
 
 $done({ body: JSON.stringify(obj) });
