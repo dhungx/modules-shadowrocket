@@ -8,7 +8,7 @@ var obj = JSON.parse($response.body);
 
 obj.Attention = "Chúc mừng bạn! Vui lòng không bán hoặc chia sẻ cho người khác!";
 
-var ohoang7 = {
+var locket02 = {
   is_sandbox: false,
   ownership_type: "PURCHASED",
   billing_issues_detected_at: null,
@@ -24,7 +24,7 @@ var ohoang7 = {
 var dohungx = {
   grace_period_expires_date: null,
   purchase_date: "2024-07-28T01:04:17Z",
-  product_identifier: "com.ohoang7.premium.yearly",
+  product_identifier: "com.locket02.premium.yearly",
   expires_date: "2099-12-18T01:04:17Z"
 };
 
@@ -35,14 +35,14 @@ if (match) {
   
   if (s) {
     dohungx.product_identifier = s;
-    obj.subscriber.subscriptions[s] = ohoang7;
+    obj.subscriber.subscriptions[s] = locket02;
   } else {
-    obj.subscriber.subscriptions["com.ohoang7.premium.yearly"] = ohoang7;
+    obj.subscriber.subscriptions["com.locket02.premium.yearly"] = locket02;
   }
 
   obj.subscriber.entitlements[e] = dohungx;
 } else {
-  obj.subscriber.subscriptions["com.ohoang7.premium.yearly"] = ohoang7;
+  obj.subscriber.subscriptions["com.locket02.premium.yearly"] = locket02;
   obj.subscriber.entitlements.pro = dohungx;
 }
 
